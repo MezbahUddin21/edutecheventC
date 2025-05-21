@@ -11,7 +11,7 @@ const page = () => {
   const [data, setData] = useState({
     title: "",
     description: "",
-    category: "Startup",
+    category: "Education",
     author: "",
   });
 
@@ -53,7 +53,7 @@ const page = () => {
     <>
       <form
         onSubmit={onSubmitHandler}
-        className="pt-5 px-5 pb-10 sm:pt-12 sm:pl-16 shadow-[1px_1px_10px_#AEB6B7] p-4 rounded-md mt-5 mb-10"
+        className="pt-5 px-5 pb-10 sm:pt-12 sm:pl-16 shadow-[1px_1px_10px_#AEB6B7] p-4 rounded-md mt-5 mb-10 h-[150vh]"
       >
         <p className="text-base">Thumbnail</p>
         <label htmlFor="image">
@@ -77,7 +77,7 @@ const page = () => {
 
         {/* Author image upload  */}
 
-        <p className="text-base">Author Image</p>
+        <p className="text-base">Organization's Logo</p>
         <label htmlFor="author_img">
           <Image
             className="mt-2 rounded-full cursor-pointer"
@@ -97,18 +97,18 @@ const page = () => {
           required
         />
 
-        <p className="text-base mt-4">Author</p>
+        <p className="text-base mt-4">Organization</p>
         <input
           name="author"
           onChange={onChangeHandler}
           value={data.author}
           className="w-full sm:w-[500px] mt-2 px-4 py-3 border"
           type="text"
-          placeholder="Author name"
+          placeholder="Organization name"
           required
         />
 
-        <p className="text-base mt-4">Blog Title</p>
+        <p className="text-base mt-4">Event Title</p>
         <input
           name="title"
           onChange={onChangeHandler}
@@ -119,7 +119,7 @@ const page = () => {
           required
         />
 
-        <p className="text-base mt-4">Blog Description</p>
+        <p className="text-base mt-4">Event Description</p>
         <textarea
           name="description"
           onChange={onChangeHandler}
@@ -131,17 +131,19 @@ const page = () => {
           required
         />
 
-        <p className="text-base mt-4">Blog Category</p>
+        <p className="text-base mt-4">Event Category</p>
         <select
           name="category"
           onChange={onChangeHandler}
           value={data.category}
           className="w-40 mt-2 px-4 py-3 border text-grey-500 cursor-pointer"
         >
-          <option className="cursor-pointer" value="Startup">Startup</option>
+          <option className="cursor-pointer" value="Education">Education</option>
           <option className="cursor-pointer" value="Technology">Technology</option>
-          <option className="cursor-pointer" value="Lifestyle">Lifestyle</option>
-          <option className="cursor-pointer" value="Politics">Politics</option>
+          <option className="cursor-pointer" value="AI / Data Science">AI / Data Science</option>
+          <option className="cursor-pointer" value="EdTech">EdTech</option>
+          <option className="cursor-pointer" value="Cybersecurity">Cybersecurity</option>
+          <option className="cursor-pointer" value="Startup & Innovation">Startup & Innovation</option>
         </select>
 
         <br />

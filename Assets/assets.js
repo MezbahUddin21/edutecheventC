@@ -23,6 +23,12 @@ import add_icon from './add_icon.png'
 import email_icon from './email_icon.png'
 import upload_area from './upload_area.png'
 import upload_auth from './upload_auth.png'
+import review from './review.png'
+
+import slide1 from './slide1.png'
+import slide2 from './slide2.png'
+import slide3 from './slide3.png'
+
 
 export const assets = {
     facebook_icon,
@@ -36,7 +42,19 @@ export const assets = {
     add_icon,
     email_icon,
     upload_area,
-    upload_auth
+    upload_auth,
+    slide1,
+    slide2,
+    slide3,
+    review,
+    blog_pic_2,
+    blog_pic_3,
+    blog_pic_4,
+    blog_pic_5,
+    blog_pic_6,
+    blog_pic_7,
+    blog_pic_8,
+    blog_pic_9
     }
 
     export const blog_data = [

@@ -19,14 +19,14 @@ const Sidebar = () => {
             className="flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
             <Image src={assets.add_icon} alt="" width={28}/>
-            <p>Add Blogs</p>
+            <p>Create Event</p>
           </Link>
           <Link
             href="/admin/blogList"
             className=" mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
             <Image src={assets.blog_icon} alt="" width={28} />
-            <p>Blog Lists</p>
+            <p>Event Lists</p>
           </Link>
           <Link
             href="/admin/subscriptions"
