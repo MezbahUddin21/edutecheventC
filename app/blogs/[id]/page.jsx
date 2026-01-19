@@ -46,7 +46,7 @@ const page = ({params}) => {
         
         <div className="md:flex sm:space-x-4 md:space-x-7">
             <div className="blog-content pt-5 w-64 flex-auto" dangerouslySetInnerHTML={{__html:data.description}}></div>
-            <BuyTicket className="w-32 flex-auto mt-2"/>
+            <BuyTicket data={data} className="w-32 flex-auto mt-2"/>
         </div>
 
 

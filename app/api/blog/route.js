@@ -51,8 +51,9 @@ export async function POST(request) {
         description: `${formData.get('description')}`,
         category: `${formData.get('category')}`,
         author: `${formData.get('author')}`,
+        ticket_price:`${formData.get('ticket_price')}`,
         image: `${imgUrl}`,
-        author_img: `${authImgUrl}`
+        author_img: `${authImgUrl}`,
     }
 
     await BlogModel.create(blogData);

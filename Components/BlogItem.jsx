@@ -23,7 +23,7 @@ const BlogItem = ({image, title, description, category, id, author, profile}) =>
                 <p className=" px-1 inline text-grey text-sm md:mr-10 mt-1">{author}</p>
                 <Image src={assets.review} className="inline h-[3vh] w-[7vh] "></Image>
             </div>
-            <Link href={`/blogs/${id}`} className="flex items-center py-2 font-semibold text-center">Book your tecket<Image width={12} className="mx-2" src={assets.arrow} alt=''/></Link>
+            <Link href={`/blogs/${id}`} className="flex items-center py-2 font-semibold text-center">Book your ticket<Image width={12} className="mx-2" src={assets.arrow} alt=''/></Link>
         </div>
     </div>
  )

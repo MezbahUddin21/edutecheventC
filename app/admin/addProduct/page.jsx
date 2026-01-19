@@ -1,9 +1,29 @@
 "use client";
 import { assets } from "@/Assets/assets";
 import axios from "axios";
+import { TicketCheck } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+});
+
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ color: [] }, { background: [] }],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+    ["clean"],
+  ],
+};
+
 
 const page = () => {
   const [image, setImage] = useState(false);
@@ -13,6 +33,7 @@ const page = () => {
     description: "",
     category: "Education",
     author: "",
+    ticket_price:3,
   });
 
   const onChangeHandler = (event) => {
@@ -32,6 +53,7 @@ const page = () => {
     formData.append("author", data.author);
     formData.append("author_img", author_img);
     formData.append("image", image);
+    formData.append("ticket_price", data.ticket_price);
 
     const response = await axios.post("/api/blog", formData);
 
@@ -43,6 +65,7 @@ const page = () => {
         description: "",
         category: "Startup",
         author: "",
+        ticket_price:3,
       });
     } else {
       toast.error("Error");
@@ -108,7 +131,7 @@ const page = () => {
           required
         />
 
-        <p className="text-base mt-4">Event Title</p>
+        {/* <p className="text-base mt-4">Event Title</p>
         <input
           name="title"
           onChange={onChangeHandler}
@@ -117,9 +140,20 @@ const page = () => {
           type="text"
           placeholder="Type here"
           required
+        /> */}
+
+        <p className="text-base mt-4">Event Title</p>
+        <ReactQuill
+          theme="snow"
+          value={data.title}
+          onChange={(value) =>
+            setData((prev) => ({ ...prev, title: value }))
+          }
+          modules={quillModules}
+          className="sm:w-[500px] mt-2 bg-white"
         />
 
-        <p className="text-base mt-4">Event Description</p>
+        {/* <p className="text-base mt-4">Event Description</p>
         <textarea
           name="description"
           onChange={onChangeHandler}
@@ -129,9 +163,31 @@ const page = () => {
           placeholder="Write content here"
           rows={6}
           required
+        /> */}
+
+
+        <p className="text-base mt-4">Event Description</p>
+        <style jsx global>{`
+          .event-desc-editor .ql-editor {
+            min-height: 200px;
+            max-height: 200px;
+            overflow-y: auto;
+          }
+        `}</style>
+
+        <ReactQuill
+          className="event-desc-editor sm:w-[500px] mt-2 bg-white"
+          theme="snow"
+          value={data.description}
+          onChange={(value) =>
+            setData((prev) => ({ ...prev, description: value }))
+          }
+          modules={quillModules}
+          // className="sm:w-[500px] mt-2 bg-white"
         />
 
-        <p className="text-base mt-4">Event Category</p>
+
+        <p className="text-base mt-4 ">Event Category</p>
         <select
           name="category"
           onChange={onChangeHandler}
@@ -145,6 +201,17 @@ const page = () => {
           <option className="cursor-pointer" value="Cybersecurity">Cybersecurity</option>
           <option className="cursor-pointer" value="Startup & Innovation">Startup & Innovation</option>
         </select>
+
+        <p className="text-base mt-4">Ticket Price</p>
+        <input
+          name="ticket_price"
+          onChange={onChangeHandler}
+          value={data.ticket_price}
+          className="w-full sm:w-[500px] mt-2 px-4 py-3 border"
+          type="number"
+          // placeholder="Type here"
+          required
+        />
 
         <br />
         <button type="submit" className="mt-8 w-40 h-12 bg-black text-white">
