@@ -20,7 +20,7 @@ const Subscribe = () => {
   }
 
   return (
-      <div className="text-center sm:my-6 md:my-10">
+      <div className="text-center my-10">
         <h1 className="text-3xl sm:text-5xl font-medium">Here you go</h1>
         <p className="mt-10 max-w-[740px] m-auto text-xs sm:text-base">
           Subscribe to get updates about upcoming events

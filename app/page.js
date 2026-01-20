@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   return (
-    <div className="px-20 py-10">
+    <div className="px-10 md:px-20 py-10">
       <ToastContainer theme="dark"/>
       <Header/>
       <Subscribe/>

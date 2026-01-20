@@ -23,32 +23,51 @@ const Header = () => {
   }
 
   return (
-      <div className="flex justify-between items-center shadow-[1px_1px_10px_#AEB6B7] p-4 rounded-md">
-        
-        {/* Logo on the left */}
-        <Link href={"/"}>
-          <Image src={assets.logo} width={180} alt='' className="w-[130px] sm:w-auto" />
-        </Link>
+    <div className="flex items-center justify-between shadow-[1px_1px_10px_#AEB6B7] 
+                    p-3 sm:p-4 lg:p-5 rounded-md">
 
-        {/* Spacer to push navbar and button to right */}
-        <div className="flex items-center gap-6 ml-auto">
-          {/* Navbar Items */}
-          <div className="hidden md:flex gap-6 text-sm font-medium">
-            {/* <Link href="/events" className="hover:text-gray-600">Events</Link> */}
-            <Link href="/about" className="hover:text-gray-600">About</Link>
-            <Link href="/contact" className="hover:text-gray-600">Contact</Link>
-          </div>
+      {/* Logo */}
+      <Link href="/">
+        <Image
+          src={assets.logo}
+          alt="Logo"
+          width={180}
+          className="w-[110px] sm:w-[130px] md:w-[160px] lg:w-[180px]"
+        />
+      </Link>
 
-          {/* Get Start Button */}
-          <Link href={"/register"}>
-            <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 rounded-md bg-white hover:bg-slate-200">
-              Get Start 
-              <Image width={15} src={assets.arrow} alt=''/>
-            </button>
+      {/* Right Section */}
+      <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
+
+        {/* Navbar Links (hidden on small devices) */}
+        <div className="hidden md:flex gap-5 lg:gap-8 text-sm lg:text-base font-medium">
+          <Link href="/about" className="hover:text-gray-600 transition">
+            About
+          </Link>
+          <Link href="/contact" className="hover:text-gray-600 transition">
+            Contact
           </Link>
         </div>
 
+        {/* Get Start Button */}
+        <Link href="/register">
+          <button
+            className="flex items-center gap-2 font-medium
+                      py-1.5 px-3
+                      sm:py-2 sm:px-4
+                      md:py-2.5 md:px-5
+                      lg:py-3 lg:px-6
+                      text-xs sm:text-sm md:text-base
+                      rounded-md bg-white hover:bg-slate-200 transition"
+          >
+            Get Start
+            <Image width={14} src={assets.arrow} alt="Arrow" className="sm:w-4" />
+          </button>
+        </Link>
+
       </div>
+    </div>
+
   )
 };
 

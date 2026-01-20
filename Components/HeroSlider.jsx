@@ -21,9 +21,9 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <div className="relative w-full h-[60vh] overflow-hidden sm:my-5 md:my-10 lg:my-10">
+    <div className="relative w-full h-[20vh] sm:h-[40vh] md:h-[60vh] overflow-hidden  my-5 md:my-10 lg:my-10">
       {images.map((src, index) => (
-        <Image src={src} alt='' key={index} className={` rounded  absolute top-0 left-0 w-full md:h-[60vh] lg:h-[60vh] sm:h-[40vh] object-cover transition-opacity duration-1000 ${
+        <Image src={src} alt='' key={index} className={` rounded  absolute top-0 left-0 w-full h-[20vh] md:h-[60vh] lg:h-[60vh] sm:h-[40vh] object-cover transition-opacity duration-1000 ${
             index === current ? 'opacity-100' : 'opacity-0'
           }`} />
       ))}
@@ -31,11 +31,11 @@ export default function HeroSlider() {
 
 
       {/* Optional: Dots */}
-      <div className="bg-gray-300 opacity-50 p-3 rounded absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2 mx-3">
+      <div className="bg-gray-300 opacity-50 p-2 sm:p-3 rounded absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2 mx-3">
         {images.map((_, index) => (
           <div
             key={index}
-            className={`w-3 h-3 opacity-100 rounded-full ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 opacity-100 rounded-full ${
               index === current ? 'bg-black' : 'bg-gray-400'
             }`}
           />
