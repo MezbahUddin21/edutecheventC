@@ -11,11 +11,12 @@ import BuyTicket from "@/Components/BuyTicket";
 const page = ({params}) => {
 
     const [data, setData] = useState(null);
+    const resolvedParams = React.use(params);
 
     const fetchBlogData = async ()=>{
         const response = await axios.get('/api/blog',{
             params:{
-                id:params.id
+                id:resolvedParams.id
             }
         });
 
@@ -33,16 +34,20 @@ const page = ({params}) => {
 
         <div className="text-center mt-24 mb-10">
             <h1 className="text-2xl sm:text-5xl font-semibold max-w-[700px] mx-auto " dangerouslySetInnerHTML={{__html:data.title}}></h1>
+            {data.author_img && (
             <div className="flex justify-center items-center">
-                <Image className="  max-auto mt-6 border border-white rounded-full w-[6vh] h-[6vh]" src={data.author_img} width={60} height={60} alt=""/>
+                <Image className="  max-auto mt-6 border border-white rounded-full w-[6vh] h-[6vh]" src={data.author_img} width={60} height={60} style={{ width: 'auto', height: 'auto' }} alt="Author profile picture"/>
             </div>
+            )}
             <p className="mt-1 pb-2 text-lg max-w-[740px] mx-auto">{data.author}</p>
         </div>
     </div>
 
 
     <div className="mx-5 max-w-[1000px] md:m-auto  bg-whiterelative bg-white p-7">
-        <Image className="border-4 border-white " src={data.image} width={1280} height={720} alt=""/>
+        {data.image && (
+        <Image className="border-4 border-white " src={data.image} width={1280} height={720} style={{ width: 'auto', height: 'auto' }} alt="Event featured image"/>
+        )}
         
         <div className="md:flex sm:space-x-4 md:space-x-7">
             <div className="blog-content pt-5 w-64 flex-auto" dangerouslySetInnerHTML={{__html:data.description}}></div>
@@ -54,9 +59,9 @@ const page = ({params}) => {
             <div className="py-24">
                 <p className="text-black font font-semibold my-4">Share this article on social media</p>
                 <div className="flex">
-                    <Image src={assets.facebook_icon} width={50} alt= ""/>
-                    <Image src={assets.twitter_icon} width={50} alt= ""/>
-                    <Image src={assets.googleplus_icon} width={50} alt= ""/>
+                    <Image src={assets.facebook_icon} width={50} height={50} alt="Facebook share"/>
+                    <Image src={assets.twitter_icon} width={50} height={50} alt="Twitter share"/>
+                    <Image src={assets.googleplus_icon} width={50} height={50} alt="Google+ share"/>
                 </div> 
             </div>
 

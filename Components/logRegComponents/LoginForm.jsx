@@ -9,32 +9,42 @@ const LoginForm = () => {
 
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router= useRouter();
 
   const onSubmitHandler = async (e)=>{
     e.preventDefault();
 
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const res = await signIn("credentials",{
         email, password, redirect:false,
       });
 
-      if(res.error){
-        toast.error("Invalid Credential");
+      if(res?.error){
+        toast.error("Invalid Credentials");
         return;
       };
 
-
-      router.replace("admin");
-
+      if(res?.ok){
+        toast.success("Login successful!");
+        router.replace("/admin");
+      }
 
     } catch (error) {
-      toast.error("No User Found");
+      toast.error("Login failed. Please try again.");
+      console.error(error);
 
+    } finally {
+      setLoading(false);
     }
-
-    // console.log(e.target.value);
   }
 
 
@@ -45,21 +55,35 @@ const LoginForm = () => {
 
             <form className="flex flex-col gap-3" onSubmit={onSubmitHandler}>
 
-                <input className="pl-4 outline-none w-[100%] rounded-md mt-5 p-5" onChange={e=> setEmail(e.target.value)} type="text"  placeholder="Email"/>
+                <input 
+                  className="pl-4 outline-none w-[100%] rounded-md mt-5 p-5" 
+                  onChange={e=> setEmail(e.target.value)} 
+                  value={email}
+                  type="email"  
+                  placeholder="Email"
+                  required
+                />
 
-                <input className="pl-4 outline-none w-[100%] rounded-md mt-5 p-5" onChange={e=> setPassword(e.target.value)}  type="password"  placeholder="Password"/>
+                <input 
+                  className="pl-4 outline-none w-[100%] rounded-md mt-5 p-5" 
+                  onChange={e=> setPassword(e.target.value)}
+                  value={password}
+                  type="password"  
+                  placeholder="Password"
+                  required
+                />
 
-                <button className="mt-8 flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 text-white rounded-md bg-slate-900 hover:bg-slate-700 justify-center">Login</button>
-{/*     
-                <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded">
-                    Error message
-                </div> */}
+                <button 
+                  type="submit"
+                  disabled={loading}
+                  className="mt-8 flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 text-white rounded-md bg-slate-900 hover:bg-slate-700 justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Logging in..." : "Login"}
+                </button>
 
                 <Link className="text-sm mt-3 text-right" href={"/register"}>
-                Don't have an account? <span className="underlined">Register</span>
-                
+                Don't have an account? <span className="underline">Register</span>
                 </Link>
-
 
             </form>
         </div>

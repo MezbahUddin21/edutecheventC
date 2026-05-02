@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className="flex flex-col bg-slate-100 p-4 ">
         <div className="flex justify-between items-center shadow-[1px_1px_10px_#AEB6B7] p-4 rounded-md">
           <Link href={"/"}>
-            <Image src={assets.logo} width={180} alt='' className="w-[130] sm:w-auto" />
+            <Image src={assets.logo} width={180} height={50} style={{ width: 'auto', height: 'auto' }} alt='EduTech Logo' className="w-[130] sm:w-auto" />
           </Link>
         </div>
 
@@ -18,21 +18,21 @@ const Sidebar = () => {
             href="/admin/addProduct"
             className="flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
-            <Image src={assets.add_icon} alt="" width={28}/>
+            <Image src={assets.add_icon} alt="Add event icon" width={28} height={28}/>
             <p>Create Event</p>
           </Link>
           <Link
             href="/admin/blogList"
             className=" mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
-            <Image src={assets.blog_icon} alt="" width={28} />
+            <Image src={assets.blog_icon} alt="Event list icon" width={28} height={28} />
             <p>Event Lists</p>
           </Link>
           <Link
             href="/admin/subscriptions"
             className="mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
-            <Image src={assets.email_icon} alt="" width={28} />
+            <Image src={assets.email_icon} alt="Email/Subscription icon" width={28} height={28} />
             <p>Subscriptions</p>
           </Link>
         </div>

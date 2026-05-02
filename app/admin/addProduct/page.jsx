@@ -5,24 +5,7 @@ import { TicketCheck } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
 
-
-const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-});
-
-const quillModules = {
-  toolbar: [
-    [{ header: [1, 2, 3, false] }],
-    ["bold", "italic", "underline", "strike"],
-    [{ color: [] }, { background: [] }],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ align: [] }],
-    ["clean"],
-  ],
-};
 
 
 const page = () => {
@@ -85,7 +68,8 @@ const page = () => {
             src={!image ? assets.upload_area : URL.createObjectURL(image)}
             width={140}
             height={70}
-            alt=""
+            style={{ width: 'auto', height: 'auto' }}
+            alt="Upload event thumbnail"
           />
         </label>
         <input
@@ -109,7 +93,8 @@ const page = () => {
             }
             width={60}
             height={60}
-            alt=""
+            style={{ width: 'auto', height: 'auto' }}
+            alt="Upload organization logo"
           />
         </label>
         <input
@@ -143,14 +128,14 @@ const page = () => {
         /> */}
 
         <p className="text-base mt-4">Event Title</p>
-        <ReactQuill
-          theme="snow"
+        <input
+          name="title"
+          onChange={onChangeHandler}
           value={data.title}
-          onChange={(value) =>
-            setData((prev) => ({ ...prev, title: value }))
-          }
-          modules={quillModules}
-          className="sm:w-[500px] mt-2 bg-white"
+          className="w-full sm:w-[500px] mt-2 px-4 py-3 border rounded-md"
+          type="text"
+          placeholder="Enter event title"
+          required
         />
 
         {/* <p className="text-base mt-4">Event Description</p>
@@ -165,25 +150,15 @@ const page = () => {
           required
         /> */}
 
-
         <p className="text-base mt-4">Event Description</p>
-        <style jsx global>{`
-          .event-desc-editor .ql-editor {
-            min-height: 200px;
-            max-height: 200px;
-            overflow-y: auto;
-          }
-        `}</style>
-
-        <ReactQuill
-          className="event-desc-editor sm:w-[500px] mt-2 bg-white"
-          theme="snow"
+        <textarea
+          name="description"
+          onChange={onChangeHandler}
           value={data.description}
-          onChange={(value) =>
-            setData((prev) => ({ ...prev, description: value }))
-          }
-          modules={quillModules}
-          // className="sm:w-[500px] mt-2 bg-white"
+          className="w-full sm:w-[500px] mt-2 px-4 py-3 border rounded-md"
+          placeholder="Write event description here"
+          rows={6}
+          required
         />
 
 

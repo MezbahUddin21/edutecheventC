@@ -32,6 +32,9 @@ const Header = () => {
           src={assets.logo}
           alt="Logo"
           width={180}
+          height={50}
+          loading="eager"
+          style={{ width: 'auto', height: 'auto' }}
           className="w-[110px] sm:w-[130px] md:w-[160px] lg:w-[180px]"
         />
       </Link>
@@ -61,7 +64,7 @@ const Header = () => {
                       rounded-md bg-white hover:bg-slate-200 transition"
           >
             Get Start
-            <Image width={14} src={assets.arrow} alt="Arrow" className="sm:w-4" />
+            <Image width={14} height={14} src={assets.arrow} alt="Arrow icon" style={{ width: 'auto', height: 'auto' }} className="sm:w-4" />
           </button>
         </Link>
 

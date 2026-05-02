@@ -49,7 +49,7 @@ export default function TopCategories() {
             >
               <Image src={categories.image}
                 alt={categories.name}
-                className="w-full h-full object-cover" width={700} height={30}/>
+                className="w-full h-full object-cover" width={700} height={400} style={{ width: 'auto', height: 'auto' }}/>
 
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white p-4 text-lg font-bold">
                 {categories.name}
