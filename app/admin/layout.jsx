@@ -18,7 +18,7 @@ export default function Layout({ children }) {
         <div className="flex flex-col w-full px-4">
           <div className="flex items-center justify-between w-full py-11 max-h-[60px] px-12 mt-4 shadow-[1px_1px_10px_#AEB6B7] p-4 rounded-md">
             <h3 className="text-xl">Admin Panel</h3>
-            <Image className="rounded-full" src={assets.profile_icon} width={45} alt="" />
+            <Image className="rounded-full" src={assets.profile_icon} width={45} alt="" style={{ width: 'auto', height: 'auto' }}/>
             <span className="underline">
                 <button onClick={ ()=> signOut() }>Log Out</button>
             </span>

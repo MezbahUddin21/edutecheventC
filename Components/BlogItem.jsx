@@ -6,27 +6,70 @@ import React from "react";
 
 const BlogItem = ({image, title, description, category, id, author, profile}) => {
   return (
-
-    <div className="max-w-[330px] sm:max-w-[300px] bg-white  shadow-[1px_1px_5px_#889193] hover:shadow-[1px_1px_10px_#889193] rounded-sm  p-1">
-        <Link href={`/blogs/${id}`}>
-            <Image src={image} alt='Event thumbnail' width={400} height={400} style={{ width: 'auto', height: 'auto' }} className="rounded-sm h-[20vh]" />
-        </Link>
-        <p className="ml-5 mt-5 px-1 inline-block bg-black text-white text-sm">{category}</p>
-        <div className="p-5">
-            <div className="mb-2 text-lg font-medium tracking-tight text-gray-900" dangerouslySetInnerHTML={{__html:title}}>
-            </div>
-            {/* <p className="mb-3 text-sm tracking-tight text-gray-700 inline" 
-            dangerouslySetInnerHTML={{__html:description.slice(0,100)}}></p> */}
-            {/* <span  className={(description.length>100)?"text-gray-500":"text-gray-50"}>...</span> */}
-            <div className="my-3 flex item-center w-full">
-                <Image alt='Author profile' src={profile} style={{ width: 'auto', height: 'auto' }} className="inline rounded-full w-[4vh] h-[4vh]" width={30} height={30}></Image>
-                <p className=" px-1 inline text-grey text-sm md:mr-10 mt-1">{author}</p>
-                <Image alt='Review rating' src={assets.review} style={{ width: 'auto', height: 'auto' }} className="inline h-[3vh] w-[7vh] " width={28} height={12}></Image>
-            </div>
-            <Link href={`/blogs/${id}`} className="flex items-center py-2 font-semibold text-center">Book your ticket<Image width={12} height={12} className="mx-2" src={assets.arrow} style={{ width: 'auto', height: 'auto' }} alt='Arrow icon'/></Link>
+    <div className="w-full max-w-sm bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+      {/* Image Container - Fixed Height */}
+      <Link href={`/blogs/${id}`}>
+        <div className="relative w-full h-48 bg-gray-200 overflow-hidden">
+          <Image 
+            src={image} 
+            alt="Event thumbnail" 
+            fill
+            sizes="(max-width: 640px) 100vw, 384px"
+            className="object-cover w-full h-full hover:scale-110 transition-transform duration-300"
+          />
         </div>
+      </Link>
+
+      {/* Content Container */}
+      <div className="p-5">
+        {/* Category Badge */}
+        <div className="mb-3 flex items-center justify-between">
+          <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+            {category}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h3 className="mb-4 text-base font-bold text-gray-900 line-clamp-2" dangerouslySetInnerHTML={{__html:title}}>
+        </h3>
+
+        {/* Author Info */}
+        <div className="mb-4 flex items-center gap-3">
+          <Image 
+            alt="Author profile" 
+            src={profile} 
+            width={36}
+            height={36}
+            className="rounded-full object-cover"
+            style={{ width: 'auto', height: 'auto' }}
+          />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-gray-700 truncate">{author}</p>
+            <Image 
+              alt="Review rating" 
+              src={assets.review} 
+              width={70}
+              height={14}
+              className="h-3 w-auto mt-0.5"
+              style={{ width: 'auto', height: 'auto' }}
+            />
+          </div>
+        </div>
+
+        {/* CTA Button */}
+        <Link href={`/blogs/${id}`} className="flex items-center justify-center gap-2 w-full py-2.5 px-4 font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors duration-300">
+          Book Ticket
+          <Image 
+            width={14} 
+            height={14} 
+            src={assets.arrow} 
+            alt="Arrow icon"
+            style={{ width: 'auto', height: 'auto' }}
+          />
+        </Link>
+      </div>
     </div>
- )
+  )
 };
 
 export default BlogItem;

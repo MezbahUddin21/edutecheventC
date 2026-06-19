@@ -14,10 +14,10 @@ const Footer = () => {
             <p className="text-sm text-white">All right reserved. Copyright @Mezbah Uddin Maruf</p>
             <div className="flex">
               <Link href={"https://www.facebook.com/sharer/sharer.php?u=http://localhost:3000/"}>
-                <Image src={assets.facebook_icon} alt="Facebook" width={40} height={40}/>
+                <Image src={assets.facebook_icon} alt="Facebook" width={40} height={40} style={{ width: 'auto', height: 'auto' }}/>
               </Link>
-                <Image src={assets.twitter_icon} alt="Twitter" width={40} height={40}/>
-                <Image src={assets.googleplus_icon} alt="Google Plus" width={40} height={40}/>
+                <Image src={assets.twitter_icon} alt="Twitter" width={40} height={40} style={{ width: 'auto', height: 'auto' }}/>
+                <Image src={assets.googleplus_icon} alt="Google Plus" width={40} height={40} style={{ width: 'auto', height: 'auto' }}/>
             </div>
         </div>
       </div>

@@ -18,21 +18,21 @@ const Sidebar = () => {
             href="/admin/addProduct"
             className="flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
-            <Image src={assets.add_icon} alt="Add event icon" width={28} height={28}/>
+            <Image src={assets.add_icon} alt="Add event icon" width={28} height={28} style={{ width: 'auto', height: 'auto' }}/>
             <p>Create Event</p>
           </Link>
           <Link
             href="/admin/blogList"
             className=" mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
-            <Image src={assets.blog_icon} alt="Event list icon" width={28} height={28} />
+            <Image src={assets.blog_icon} alt="Event list icon" width={28} height={28} style={{ width: 'auto', height: 'auto' }}/>
             <p>Event Lists</p>
           </Link>
           <Link
             href="/admin/subscriptions"
             className="mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
-            <Image src={assets.email_icon} alt="Email/Subscription icon" width={28} height={28} />
+            <Image src={assets.email_icon} alt="Email/Subscription icon" width={28} height={28} style={{ width: 'auto', height: 'auto' }}/>
             <p>Subscriptions</p>
           </Link>
         </div>

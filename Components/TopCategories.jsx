@@ -1,69 +1,129 @@
 'use client'
 
 import { assets } from '@/Assets/assets'
-
-import { useRef } from 'react'
+import axios from 'axios'
+import { useRef, useState, useEffect } from 'react'
+import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 
-const categories = [
-  { name: 'Education', image: assets.blog_pic_2 },
-  { name: 'Technology', image: assets.blog_pic_3 },
-  { name: 'AI / Data Science', image: assets.blog_pic_4 },
-  { name: 'EdTech', image: assets.blog_pic_5 },
-  { name: 'Cybersecurity', image: assets.blog_pic_6 },
-  { name: 'Startup & Innovation', image: assets.blog_pic_7 },
-]
+// Map a category to a fallback image (can be extended)
+const categoryImageMap = {
+  Education: assets.blog_pic_2,
+  Technology: assets.blog_pic_3,
+  'AI / Data Science': assets.blog_pic_4,
+  EdTech: assets.blog_pic_5,
+  Cybersecurity: assets.blog_pic_6,
+  'Startup & Innovation': assets.blog_pic_7,
+}
 
 export default function TopCategories() {
   const scrollRef = useRef(null)
+  const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let mounted = true
+    const fetchCategories = async () => {
+      try {
+        setLoading(true)
+        const res = await axios.get('/api/blog')
+        const blogs = res.data.blogs || []
+
+        // Extract unique categories and keep order of first appearance
+        const seen = new Set()
+        const unique = []
+        for (const b of blogs) {
+          if (b && b.category && !seen.has(b.category)) {
+            seen.add(b.category)
+            unique.push(b.category)
+          }
+        }
+
+        const mapped = unique.map((name) => ({
+          name,
+          image: categoryImageMap[name] || assets.blog_pic_2,
+        }))
+
+        if (mounted) setCategories(mapped)
+      } catch (err) {
+        console.error('TopCategories fetch error:', err)
+        if (mounted) {
+          // fallback to defaults
+          setCategories(Object.keys(categoryImageMap).map((k) => ({ name: k, image: categoryImageMap[k] })))
+        }
+      } finally {
+        if (mounted) setLoading(false)
+      }
+    }
+
+    fetchCategories()
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   const scroll = (offset) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: offset, behavior: 'smooth' })
-    }
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: offset, behavior: 'smooth' })
   }
 
   return (
-    <section className="relative py-10 bg-gray-50 my-20">
-      <h2 className="text-2xl font-semibold text-center mb-6 text-black">
-        Top Categories
-      </h2>
+    <section className="relative py-12 bg-white my-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6 text-gray-900">Top Categories</h2>
 
-      <div className="relative mt-10">
-        <button
-          onClick={() => scroll(-300)}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
-        >
-          <ChevronLeft />
-        </button>
+        <div className="relative">
+          <button
+            aria-label="scroll left"
+            onClick={() => scroll(-320)}
+            className="absolute -left-2 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-2 shadow-md hover:scale-105 transition-transform"
+          >
+            <ChevronLeft size={18} />
+          </button>
 
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto space-x-4 px-8 scroll-smooth scrollbar-hide"
-        >
-          {categories.map((categories, index) => (
-            <div
-              key={index}
-              className="min-w-[300px] rounded-xl shadow-md overflow-hidden relative"
-            >
-              <Image src={categories.image}
-                alt={categories.name}
-                className="w-full h-full object-cover" width={700} height={400} style={{ width: 'auto', height: 'auto' }}/>
-
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white p-4 text-lg font-bold">
-                {categories.name}
+          <div ref={scrollRef} className="flex gap-6 overflow-x-auto py-4 px-2 no-scrollbar scroll-smooth">
+            {loading ? (
+              <div className="flex items-center justify-center w-full h-48">
+                <p className="text-gray-500">Loading categories...</p>
               </div>
-            </div>
-          ))}
-        </div>
+            ) : categories.length === 0 ? (
+              <div className="flex items-center justify-center w-full h-48">
+                <p className="text-gray-500">No categories available</p>
+              </div>
+            ) : (
+              categories.map((c, i) => (
+                <Link
+                  key={c.name + i}
+                  href={`/category/${encodeURIComponent(c.name)}`}
+                  className="min-w-[260px] sm:min-w-[300px] md:min-w-[320px] h-48 rounded-xl overflow-hidden shadow-sm hover:shadow-xl bg-gray-50 relative flex-shrink-0 transition-all duration-300 hover:scale-105"
+                >
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={c.image}
+                      alt={c.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 320px"
+                      className="object-cover"
+                      priority={i < 3}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-lg font-bold text-white truncate">{c.name}</h3>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            )}
+          </div>
 
-        <button
-          onClick={() => scroll(300)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
-        >
-          <ChevronRight />
-        </button>
+          <button
+            aria-label="scroll right"
+            onClick={() => scroll(320)}
+            className="absolute -right-2 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-2 shadow-md hover:scale-105 transition-transform"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
       </div>
     </section>
   )

@@ -59,9 +59,9 @@ const page = ({params}) => {
             <div className="py-24">
                 <p className="text-black font font-semibold my-4">Share this article on social media</p>
                 <div className="flex">
-                    <Image src={assets.facebook_icon} width={50} height={50} alt="Facebook share"/>
-                    <Image src={assets.twitter_icon} width={50} height={50} alt="Twitter share"/>
-                    <Image src={assets.googleplus_icon} width={50} height={50} alt="Google+ share"/>
+                    <Image src={assets.facebook_icon} width={50} height={50} alt="Facebook share" style={{ width: 'auto', height: 'auto' }}/>
+                    <Image src={assets.twitter_icon} width={50} height={50} alt="Twitter share" style={{ width: 'auto', height: 'auto' }}/>
+                    <Image src={assets.googleplus_icon} width={50} height={50} alt="Google+ share" style={{ width: 'auto', height: 'auto' }}/>
                 </div> 
             </div>
 
