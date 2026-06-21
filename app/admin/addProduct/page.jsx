@@ -5,8 +5,7 @@ import { TicketCheck } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
-
+import RichTextEditor from "@/Components/RichTextEditor";
 
 const page = () => {
   const [image, setImage] = useState(false);
@@ -25,6 +24,10 @@ const page = () => {
     setData((data) => ({ ...data, [name]: value }));
 
     console.log(data);
+  };
+
+  const onDescriptionChange = (value) => {
+    setData((data) => ({ ...data, description: value }));
   };
 
   const onSubmitHandler = async (e) => {
@@ -152,15 +155,11 @@ const page = () => {
         /> */}
 
         <p className="text-base mt-4">Event Description</p>
-        <textarea
-          name="description"
-          onChange={onChangeHandler}
-          value={data.description}
-          className="w-full sm:w-[500px] mt-2 px-4 py-3 border rounded-md"
-          placeholder="Write event description here"
-          rows={6}
-          required
+        <RichTextEditor 
+          value={data.description} 
+          onChange={onDescriptionChange} 
         />
+        <div style={{ height: "60px" }}></div>
 
 
         <p className="text-base mt-4 ">Event Category</p>
