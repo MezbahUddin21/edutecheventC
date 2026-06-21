@@ -9,12 +9,12 @@ import Image from 'next/image'
 
 // Map a category to a fallback image (can be extended)
 const categoryImageMap = {
-  Education: assets.blog_pic_2,
-  Technology: assets.blog_pic_3,
-  'AI / Data Science': assets.blog_pic_4,
-  EdTech: assets.blog_pic_5,
-  Cybersecurity: assets.blog_pic_6,
-  'Startup & Innovation': assets.blog_pic_7,
+  Education: assets.event_pic_2,
+  Technology: assets.event_pic_3,
+  'AI / Data Science': assets.event_pic_4,
+  EdTech: assets.event_pic_5,
+  Cybersecurity: assets.event_pic_6,
+  'Startup & Innovation': assets.event_pic_7,
 }
 
 export default function TopCategories() {
@@ -27,22 +27,22 @@ export default function TopCategories() {
     const fetchCategories = async () => {
       try {
         setLoading(true)
-        const res = await axios.get('/api/blog')
-        const blogs = res.data.blogs || []
+        const res = await axios.get('/api/event')
+        const events = res.data.events || []
 
         // Extract unique categories and keep order of first appearance
         const seen = new Set()
         const unique = []
-        for (const b of blogs) {
-          if (b && b.category && !seen.has(b.category)) {
-            seen.add(b.category)
-            unique.push(b.category)
+        for (const e of events) {
+          if (e && e.category && !seen.has(e.category)) {
+            seen.add(e.category)
+            unique.push(e.category)
           }
         }
 
         const mapped = unique.map((name) => ({
           name,
-          image: categoryImageMap[name] || assets.blog_pic_2,
+          image: categoryImageMap[name] || assets.event_pic_2,
         }))
 
         if (mounted) setCategories(mapped)
@@ -69,7 +69,7 @@ export default function TopCategories() {
 
   return (
     <section className="relative py-12 bg-white my-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6 text-gray-900">Top Categories</h2>
 
         <div className="relative">

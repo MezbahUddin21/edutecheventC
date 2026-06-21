@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ConnectDB } from '@/lib/config/db';
-import BlogModel from '@/lib/models/BlogModel';
+import EventModel from '@/lib/models/EventModel';
 import {writeFile} from 'fs/promises';
 const fs = require('fs')
 
@@ -10,23 +10,23 @@ const LoadDB = async ()=>{
 
 LoadDB();
 
-//API endpoint to get all blogs
+//API endpoint to get all events
 
 export async function GET(request){
 
-    const blogId =request.nextUrl.searchParams.get("id");
-    if(blogId){
-        const blog = await BlogModel.findById(blogId);
-        return NextResponse.json(blog);
+    const eventId =request.nextUrl.searchParams.get("id");
+    if(eventId){
+        const event = await EventModel.findById(eventId);
+        return NextResponse.json(event);
     }else{
-        const blogs=await BlogModel.find({});
-        return NextResponse.json({blogs});
+        const events=await EventModel.find({});
+        return NextResponse.json({events});
     }
 
 
 }
 
-//API endpoint for uploading blog
+//API endpoint for uploading event
 
 export async function POST(request) {
     const formData = await request.formData();
@@ -46,7 +46,7 @@ export async function POST(request) {
     await writeFile(authPath, authBuffer);
     const authImgUrl = `/${timestamp}_${author_img.name}`;
 
-    const blogData = {
+    const eventData = {
         title: `${formData.get('title')}`,
         description: `${formData.get('description')}`,
         category: `${formData.get('category')}`,
@@ -56,22 +56,22 @@ export async function POST(request) {
         author_img: `${authImgUrl}`,
     }
 
-    await BlogModel.create(blogData);
-    console.log("Blog Saved");
+    await EventModel.create(eventData);
+    console.log("Event Saved");
 
 
-    return NextResponse.json({success:true, msg:"Blog Added"});
+    return NextResponse.json({success:true, msg:"Event Added"});
 
 }
 
 
-    //Creating API endpoint to delete blog
+    //Creating API endpoint to delete event
 
     export async function DELETE(request) {
         const id = await request.nextUrl.searchParams.get('id');
-        const blog = await BlogModel.findById(id);
-        fs.unlink(`./public${blog.image}`,()=>{});
-        fs.unlink(`./public${blog.author_img}`,()=>{});
-        await BlogModel.findByIdAndDelete(id);
-        return NextResponse.json({msg:"Blog Deleted"});
+        const event = await EventModel.findById(id);
+        fs.unlink(`./public${event.image}`,()=>{});
+        fs.unlink(`./public${event.author_img}`,()=>{});
+        await EventModel.findByIdAndDelete(id);
+        return NextResponse.json({msg:"Event Deleted"});
     }

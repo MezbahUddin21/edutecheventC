@@ -38,7 +38,7 @@ const page = () => {
     formData.append("image", image);
     formData.append("ticket_price", data.ticket_price);
 
-    const response = await axios.post("/api/blog", formData);
+    const response = await axios.post("/api/event", formData);
 
     if (response.data.success) {
       toast.success(response.data.msg);
@@ -68,6 +68,7 @@ const page = () => {
             src={!image ? assets.upload_area : URL.createObjectURL(image)}
             width={140}
             height={70}
+            loading="eager"
             style={{ width: 'auto', height: 'auto' }}
             alt="Upload event thumbnail"
           />

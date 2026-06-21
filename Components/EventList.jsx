@@ -1,24 +1,24 @@
 
-import { assets, blog_data } from "@/Assets/assets";
+import { assets, event_data } from "@/Assets/assets";
 import React, { useEffect } from "react";
-import BlogItem from "./BlogItem";
+import EventItem from "./EventItem";
 import { useState } from "react";
 import axios from "axios";
 
-const BlogList = () => {
+const EventList = () => {
 
   const [menu,setMenu] = useState("All");
-  const [blogs, setBlogs] = useState([]);
+  const [events, setEvents] = useState([]);
 
   
-  const fetchBlogs = async ()=>{
-    const response = await axios.get('/api/blog');
-    setBlogs(response.data.blogs);
-    console.log(response.data.blogs);
+  const fetchEvents = async ()=>{
+    const response = await axios.get('/api/event');
+    setEvents(response.data.events);
+    console.log(response.data.events);
   }
 
   useEffect(()=>{
-    fetchBlogs();
+    fetchEvents();
   },[]);
 
 
@@ -42,11 +42,11 @@ const BlogList = () => {
 
         </div>
         <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 ">
-          {blogs.filter((item)=> menu==="All"?true:item.category===menu).map((item,index)=>(<BlogItem key={index} id={item._id} image={item.image} title={item.title} description={item.description} category={item.category} author={item.author} profile={item.author_img}/>))}
+          {events.filter((item)=> menu==="All"?true:item.category===menu).map((item,index)=>(<EventItem key={index} id={item._id} image={item.image} title={item.title} description={item.description} category={item.category} author={item.author} profile={item.author_img}/>))}
 
         </div>
     </div>
   )
 };
 
-export default BlogList;
+export default EventList;

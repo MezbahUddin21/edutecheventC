@@ -1,5 +1,5 @@
 'use client'
-import { assets, blog_data } from "@/Assets/assets";
+import { assets, event_data } from "@/Assets/assets";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 import Image from "next/image";
@@ -13,8 +13,8 @@ const page = ({params}) => {
     const [data, setData] = useState(null);
     const resolvedParams = React.use(params);
 
-    const fetchBlogData = async ()=>{
-        const response = await axios.get('/api/blog',{
+    const fetchEventData = async ()=>{
+        const response = await axios.get('/api/event',{
             params:{
                 id:resolvedParams.id
             }
@@ -24,7 +24,7 @@ const page = ({params}) => {
     }
 
     useEffect(()=>{
-        fetchBlogData();
+        fetchEventData();
     },[]) 
 
 
@@ -50,7 +50,7 @@ const page = ({params}) => {
         )}
         
         <div className="md:flex sm:space-x-4 md:space-x-7">
-            <div className="blog-content pt-5 w-64 flex-auto" dangerouslySetInnerHTML={{__html:data.description}}></div>
+            <div className="event-content pt-5 w-64 flex-auto" dangerouslySetInnerHTML={{__html:data.description}}></div>
             <BuyTicket data={data} className="w-32 flex-auto mt-2"/>
         </div>
 

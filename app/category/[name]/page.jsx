@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import axios from 'axios'
 import { ArrowLeft } from 'lucide-react'
-import BlogItem from '@/Components/BlogItem'
+import EventItem from '@/Components/EventItem'
 import Header from '@/Components/Header'
 import Footer from '@/Components/Footer'
 import { ToastContainer } from 'react-toastify'
@@ -14,23 +14,23 @@ import 'react-toastify/dist/ReactToastify.css'
 export default function CategoryPage() {
   const params = useParams()
   const category = decodeURIComponent(params.name)
-  const [blogs, setBlogs] = useState([])
+  const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchCategoryBlogs = async () => {
+    const fetchCategoryEvents = async () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await axios.get('/api/blog')
-        const allBlogs = response.data.blogs || []
+        const response = await axios.get('/api/event')
+        const allEvents = response.data.events || []
         
-        // Filter blogs by category
-        const filtered = allBlogs.filter(blog => blog.category === category)
-        setBlogs(filtered)
+        // Filter events by category
+        const filtered = allEvents.filter(event => event.category === category)
+        setEvents(filtered)
       } catch (err) {
-        console.error('Failed to fetch category blogs:', err)
+        console.error('Failed to fetch category events:', err)
         setError('Failed to load events. Please try again.')
       } finally {
         setLoading(false)
@@ -38,7 +38,7 @@ export default function CategoryPage() {
     }
 
     if (category) {
-      fetchCategoryBlogs()
+      fetchCategoryEvents()
     }
   }, [category])
 
@@ -78,7 +78,7 @@ export default function CategoryPage() {
           <div className="flex items-center justify-center py-20">
             <p className="text-red-500 text-lg">{error}</p>
           </div>
-        ) : blogs.length === 0 ? (
+        ) : events.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20">
             <p className="text-gray-500 text-lg mb-4">No events found in this category</p>
             <Link href="/" className="text-blue-600 hover:text-blue-700 font-semibold">
@@ -88,20 +88,20 @@ export default function CategoryPage() {
         ) : (
           <div>
             <p className="text-gray-600 mb-8">
-              Showing <span className="font-semibold text-gray-900">{blogs.length}</span> event{blogs.length !== 1 ? 's' : ''}
+              Showing <span className="font-semibold text-gray-900">{events.length}</span> event{events.length !== 1 ? 's' : ''}
             </p>
             
             <div className="flex flex-wrap justify-center gap-6 gap-y-10">
-              {blogs.map((blog) => (
-                <BlogItem
-                  key={blog._id}
-                  id={blog._id}
-                  image={blog.image}
-                  title={blog.title}
-                  description={blog.description}
-                  category={blog.category}
-                  author={blog.author}
-                  profile={blog.author_img}
+              {events.map((event) => (
+                <EventItem
+                  key={event._id}
+                  id={event._id}
+                  image={event.image}
+                  title={event.title}
+                  description={event.description}
+                  category={event.category}
+                  author={event.author}
+                  profile={event.author_img}
                 />
               ))}
             </div>

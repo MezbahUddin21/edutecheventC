@@ -1,18 +1,15 @@
 'use client'
 import ContactForm from "@/Components/contactComponents/ContactForm";
 import Footer from "@/Components/Footer";
-import Link from "next/link";
-import Image from "next/image";
-import { assets } from "@/Assets/assets";
 import Header from "@/Components/Header";
 
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white px-20 py-10">
       <main className="flex-grow">
         <section className="py-10">
-          <div className="max-w-7xl mx-auto">
+          <div className="">
             <Header className="mb-20"/>
 
             <div className="text-center my-20">

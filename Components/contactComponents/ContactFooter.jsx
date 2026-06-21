@@ -19,7 +19,7 @@ export default function ContactFooter() {
             <ul className="text-gray-400 space-y-2 text-sm">
               <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
-              <li><a href="#">Blogs</a></li>
+              <li><a href="#">Events</a></li>
             </ul>
           </div>
   

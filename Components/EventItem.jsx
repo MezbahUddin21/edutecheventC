@@ -4,11 +4,11 @@ import Link from "next/link";
 import React from "react";
 
 
-const BlogItem = ({image, title, description, category, id, author, profile}) => {
+const EventItem = ({image, title, description, category, id, author, profile}) => {
   return (
     <div className="w-full max-w-sm bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Image Container - Fixed Height */}
-      <Link href={`/blogs/${id}`}>
+      <Link href={`/events/${id}`}>
         <div className="relative w-full h-48 bg-gray-200 overflow-hidden">
           <Image 
             src={image} 
@@ -57,7 +57,7 @@ const BlogItem = ({image, title, description, category, id, author, profile}) =>
         </div>
 
         {/* CTA Button */}
-        <Link href={`/blogs/${id}`} className="flex items-center justify-center gap-2 w-full py-2.5 px-4 font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors duration-300">
+        <Link href={`/events/${id}`} className="flex items-center justify-center gap-2 w-full py-2.5 px-4 font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors duration-300">
           Book Ticket
           <Image 
             width={14} 
@@ -72,6 +72,6 @@ const BlogItem = ({image, title, description, category, id, author, profile}) =>
   )
 };
 
-export default BlogItem;
+export default EventItem;
 
 

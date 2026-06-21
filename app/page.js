@@ -1,6 +1,6 @@
 'use client'
 import Subscribe from "@/Components/adminComponents/Subscribe";
-import BlogList from "@/Components/BlogList";
+import EventList from "@/Components/EventList";
 import Footer from "@/Components/Footer";
 import Header from "@/Components/Header";
 import HeroSlider from "@/Components/HeroSlider";
@@ -15,7 +15,7 @@ export default function Home() {
       <Header/>
       <Subscribe/>
       <HeroSlider/>
-      <BlogList/>
+      <EventList/>
       <TopCategories/>
       <Footer/>
     </div>
