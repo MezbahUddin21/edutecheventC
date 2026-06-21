@@ -7,20 +7,6 @@ import { toast } from "react-toastify";
 
 const Header = () => {
 
-  const [email, setEmail] = useState("");
-
-  const onSubmitHandler = async(e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("email", email);
-    const response = await axios.post('/api/email', formData);
-    if(response.data.success){
-      toast.success(response.data.msg);
-      setEmail("");
-    } else {
-      toast.error("Error");
-    }
-  }
 
   return (
     <div className="flex items-center justify-between shadow-[1px_1px_10px_#AEB6B7] 

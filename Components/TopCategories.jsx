@@ -81,7 +81,7 @@ export default function TopCategories() {
             <ChevronLeft size={18} />
           </button>
 
-          <div ref={scrollRef} className="flex gap-6 overflow-x-auto py-4 px-2 no-scrollbar scroll-smooth">
+          <div ref={scrollRef} className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth">
             {loading ? (
               <div className="flex items-center justify-center w-full h-48">
                 <p className="text-gray-500">Loading categories...</p>
