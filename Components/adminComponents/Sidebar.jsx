@@ -29,6 +29,13 @@ const Sidebar = () => {
             <p>Event Lists</p>
           </Link>
           <Link
+            href="/admin/articleList"
+            className="mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
+          >
+            <Image src={assets.event_icon} alt="Article list icon" width={28} height={28} style={{ width: 'auto', height: 'auto' }}/>
+            <p>Articles</p>
+          </Link>
+          <Link
             href="/admin/subscriptions"
             className="mt-5 flex items-center pl-2 gap-3 font-medium px3 py-2 bg-white shadow-[1px_1px_5px_#AEB6B7] rounded-md hover:scale-110"
           >
