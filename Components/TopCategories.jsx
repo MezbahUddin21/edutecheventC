@@ -7,14 +7,15 @@ import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 
-// Map a category to a fallback image (can be extended)
+// Map event types to representative images
 const categoryImageMap = {
-  Education: assets.event_pic_2,
-  Technology: assets.event_pic_3,
-  'AI / Data Science': assets.event_pic_4,
-  EdTech: assets.event_pic_5,
-  Cybersecurity: assets.event_pic_6,
-  'Startup & Innovation': assets.event_pic_7,
+  Conference:  assets.event_pic_2,
+  Workshop:    assets.event_pic_3,
+  Seminar:     assets.event_pic_4,
+  Hackathon:   assets.event_pic_5,
+  Webinar:     assets.event_pic_6,
+  Bootcamp:    assets.event_pic_7,
+  'Tech Talk': assets.event_pic_8,
 }
 
 export default function TopCategories() {

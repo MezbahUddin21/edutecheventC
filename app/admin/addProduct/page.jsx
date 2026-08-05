@@ -13,7 +13,7 @@ const page = () => {
   const [data, setData] = useState({
     title: "",
     description: "",
-    category: "Education",
+    category: "Conference",
     author: "",
     ticket_price:3,
   });
@@ -49,7 +49,7 @@ const page = () => {
       setData({
         title: "",
         description: "",
-        category: "Startup",
+        category: "Conference",
         author: "",
         ticket_price:3,
       });
@@ -162,19 +162,20 @@ const page = () => {
         <div style={{ height: "60px" }}></div>
 
 
-        <p className="text-base mt-4 ">Event Category</p>
+        <p className="text-base mt-4">Event Type</p>
         <select
           name="category"
           onChange={onChangeHandler}
           value={data.category}
-          className="w-40 mt-2 px-4 py-3 border text-grey-500 cursor-pointer"
+          className="w-44 mt-2 px-4 py-3 border rounded-md text-gray-700 cursor-pointer"
         >
-          <option className="cursor-pointer" value="Education">Education</option>
-          <option className="cursor-pointer" value="Technology">Technology</option>
-          <option className="cursor-pointer" value="AI / Data Science">AI / Data Science</option>
-          <option className="cursor-pointer" value="EdTech">EdTech</option>
-          <option className="cursor-pointer" value="Cybersecurity">Cybersecurity</option>
-          <option className="cursor-pointer" value="Startup & Innovation">Startup & Innovation</option>
+          <option value="Conference">Conference</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Seminar">Seminar</option>
+          <option value="Hackathon">Hackathon</option>
+          <option value="Webinar">Webinar</option>
+          <option value="Bootcamp">Bootcamp</option>
+          <option value="Tech Talk">Tech Talk</option>
         </select>
 
         <p className="text-base mt-4">Ticket Price</p>
