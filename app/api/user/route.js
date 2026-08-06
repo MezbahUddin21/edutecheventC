@@ -20,7 +20,8 @@ export async function POST(request) {
     const userData = {
         name: `${formData.get('name')}`,
         email: `${formData.get('email')}`,
-        password: `${hasedPassword}`
+        password: `${hasedPassword}`,
+        role: formData.get('role') || 'attendee',
     }
 
     await UserModel.create(userData);
