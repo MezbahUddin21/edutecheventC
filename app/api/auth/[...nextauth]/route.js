@@ -3,7 +3,6 @@ import UserModel from "@/lib/models/UserModel";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { toast } from "react-toastify";
 
 const authOptions = {
   providers: [
@@ -21,34 +20,45 @@ const authOptions = {
 
         await ConnectDB();
 
-        const user = await UserModel.findOne({
-          email: credentials.email,
-        });
+        const user = await UserModel.findOne({ email: credentials.email });
 
-        if (!user) {
-            // toast.error("No User Found");
-            
-          return null;
-        }
+        if (!user) return null;
 
         const isPasswordCorrect = await bcrypt.compare(
           credentials.password,
           user.password
         );
 
-        if (!isPasswordCorrect) {
-            // toast.error("Incorrect Password");
-          return null;
-        }
+        if (!isPasswordCorrect) return null;
 
         return {
           id: user._id.toString(),
           name: user.name,
           email: user.email,
+          role: user.role,
         };
       },
     }),
   ],
+
+  callbacks: {
+    // Persist role in the JWT token on sign-in
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
+      return token;
+    },
+    // Expose role on the client-side session object
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+      }
+      return session;
+    },
+  },
 
   session: {
     strategy: "jwt",
