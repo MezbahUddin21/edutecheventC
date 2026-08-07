@@ -117,7 +117,7 @@ const RegisterForm = () => {
                     onChange={onChangeHandler}
                     className="hidden"
                   />
-                  {r === "attendee" ? "🎟 Attendee" : "🏢 Organizer"}
+                  {r === "attendee" ? "Attendee" : "Organizer"}
                 </label>
               ))}
             </div>
